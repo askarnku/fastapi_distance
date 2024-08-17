@@ -1,9 +1,13 @@
 from fastapi import FastAPI, HTTPException
 import requests
+from dotenv import load_dotenv
+import os
 
 app = FastAPI()
+load_dotenv()
 
-TOMTOM_API_KEY = "api_key"
+TOMTOM_API_KEY = os.getenv("TOMTOM_API_KEY")
+print(TOMTOM_API_KEY)
 
 @app.get("/distance/")
 async def get_distance(zipcode1: str, zipcode2: str):
