@@ -2,8 +2,6 @@ from fastapi import FastAPI, HTTPException
 import requests
 from dotenv import load_dotenv
 import os
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 load_dotenv()
@@ -11,18 +9,6 @@ load_dotenv()
 TOMTOM_API_KEY = os.getenv("TOMTOM_API_KEY")
 print(TOMTOM_API_KEY)
 
-
-
-app = FastAPI()
-
-# Add the CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Address of the frontend
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 @app.get("/distance/")
 async def get_distance(zipcode1: str, zipcode2: str):
     # Step 1: Geocode the first zip code
